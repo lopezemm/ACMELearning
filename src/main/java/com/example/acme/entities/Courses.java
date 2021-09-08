@@ -65,7 +65,7 @@ public class Courses implements Serializable {
     }
 
     public void setIsStarted(String isStarted) {
-        //check if value is Y or N, if is not set or is a different value default value is N
+        //check if value is S, C or N, if is not set or is a different value default value is N
         if (CourseStartedValidation.contains(isStarted)) {
             this.isStarted = isStarted;
         }else {

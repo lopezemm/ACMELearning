@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "/courses")
@@ -48,6 +49,30 @@ public class CourseController {
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @RequestMapping(value = "/start/{courseId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> startCourse(@PathVariable Long courseId){
+        try{
+            String courseName = courseService.startCourse(courseId);
+            if(!"not found".equalsIgnoreCase(courseName))
+                return new ResponseEntity<String>("Course " + courseName + " has been set as started", HttpStatus.OK);
+            return new ResponseEntity<String>("Course " + courseName + " has not been found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/cancel/{courseId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> cancelCourse(@PathVariable Long courseId){
+        try{
+            String courseMessage = courseService.cancelCourse(courseId);
+            if(!"not found".equalsIgnoreCase(courseMessage))
+                return new ResponseEntity<String>("Course " + courseMessage, HttpStatus.OK);
+            return new ResponseEntity<String>("Course " + courseMessage, HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
