@@ -93,7 +93,7 @@ public class Courses implements Serializable {
     public List<Students> getStudentsList() {
         return studentsList;
     }
-
+    @JsonBackReference(value = "students")
     public void setStudentsList(List<Students> studentsList) {
         this.studentsList = studentsList;
     }

@@ -1,5 +1,8 @@
 package com.example.acme.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +10,7 @@ import java.util.List;
 
 
 @Entity
+@JsonIgnoreProperties("coursesList")
 public class Students implements Serializable {
 
     private static final long serialVersionUID = 1L;

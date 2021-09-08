@@ -82,4 +82,16 @@ public class StudentController {
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(value = "/mycourses/{studentId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getStudentCourses(@PathVariable Long studentId){
+        try {
+            List<Courses> coursesList = studentService.getEnrolledCourses(studentId);
+            if(null!= coursesList && coursesList.size()>0)
+                return new ResponseEntity<List<Courses>>(coursesList, HttpStatus.OK);
+            return new ResponseEntity<String>("No enrolled courses", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

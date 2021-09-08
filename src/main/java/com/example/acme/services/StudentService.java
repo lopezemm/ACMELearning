@@ -66,4 +66,10 @@ public class StudentService {
         return "Student " + student.getStudentName() + " has dropped " + course.getCourseName() + " course";
     }
 
+    public List<Courses> getEnrolledCourses(Long studentId){
+        Students student = studentRepo.findById(studentId).get();
+        List<Courses> coursesList = new ArrayList<>();
+        coursesList.addAll(student.getCoursesList());
+        return coursesList;
+    }
 }
