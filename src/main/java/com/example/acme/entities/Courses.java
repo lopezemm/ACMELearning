@@ -1,6 +1,7 @@
 package com.example.acme.entities;
 
 import com.example.acme.util.CourseStartedValidation;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
@@ -79,6 +80,22 @@ public class Courses implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Instructors getInstructor() {
+        return instructor;
+    }
+    @JsonBackReference
+    public void setInstructor(Instructors instructor) {
+        this.instructor = instructor;
+    }
+
+    public List<Students> getStudentsList() {
+        return studentsList;
+    }
+
+    public void setStudentsList(List<Students> studentsList) {
+        this.studentsList = studentsList;
     }
 
     @Override

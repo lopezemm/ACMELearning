@@ -1,5 +1,7 @@
 package com.example.acme.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -59,6 +61,14 @@ public class Instructors implements Serializable {
 
     public void setInstructorJoinDate(Date instructorJoinDate) {
         this.instructorJoinDate = instructorJoinDate;
+    }
+
+    public List<Courses> getCoursesList() {
+        return coursesList;
+    }
+    @JsonManagedReference
+    public void setCoursesList(List<Courses> coursesList) {
+        this.coursesList = coursesList;
     }
 
     @Override

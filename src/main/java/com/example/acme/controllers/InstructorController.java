@@ -1,5 +1,6 @@
 package com.example.acme.controllers;
 
+import com.example.acme.entities.Courses;
 import com.example.acme.entities.Instructors;
 import com.example.acme.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,17 @@ public class InstructorController {
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @RequestMapping(value = "/mycourses/{instructorId}", method= RequestMethod.GET)
+    public ResponseEntity<?> getMyCourses(@PathVariable Long instructorId){
+        try{
+            List<Courses> listCourses =instructorService.getMyCourses(instructorId);
+            if(null != listCourses)
+                return new ResponseEntity<List<Courses>>(listCourses, HttpStatus.OK);
+            return new ResponseEntity<String>("No courses were found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

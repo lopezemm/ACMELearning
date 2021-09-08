@@ -3,6 +3,7 @@ package com.example.acme.services;
 import com.example.acme.entities.Courses;
 import com.example.acme.entities.Students;
 import com.example.acme.repositpories.CourseRepo;
+import com.example.acme.repositpories.InstructorRepo;
 import com.example.acme.util.UtilValidations;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,23 @@ public class CourseService {
 
     CourseRepo courseRepo;
 
-    public CourseService(CourseRepo courseRepo) {
+    InstructorRepo instructorRepo;
+
+    public CourseService(CourseRepo courseRepo, InstructorRepo instructorRepo) {
         this.courseRepo = courseRepo;
+        this.instructorRepo = instructorRepo;
     }
 
     public String addCourse(Courses course) {
         Courses c = new Courses();
+        c = courseRepo.save(course);
+        return c.getCourseName();
+
+    }
+
+    public String addCourse(Courses course, Long instructorId) {
+        Courses c = new Courses();
+        course.setInstructor(instructorRepo.findById(instructorId).orElse(null));
         c = courseRepo.save(course);
         return c.getCourseName();
 

@@ -1,5 +1,6 @@
 package com.example.acme.services;
 
+import com.example.acme.entities.Courses;
 import com.example.acme.entities.Instructors;
 import com.example.acme.repositpories.InstructorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,20 @@ public class InstructorService {
         }
     }
 
+    public List<Courses> getMyCourses(Long instructorId){
+        return findInstructor(instructorId).getCoursesList();
+    }
+
     public List<Instructors> getAllInstructors(){
         return instructorRepo.findAll();
+    }
+
+    public Instructors findInstructor(Long courseId){
+        Optional<Instructors> opt = instructorRepo.findById(courseId);
+        if(opt.isPresent()){
+            return opt.get();
+        }else{
+            return null;
+        }
     }
 }

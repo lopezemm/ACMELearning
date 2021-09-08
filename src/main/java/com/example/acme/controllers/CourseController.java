@@ -20,10 +20,10 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> addCourse(@RequestBody Courses course){
+    @RequestMapping(value = "/add/{instructorId}", method = RequestMethod.POST)
+    public ResponseEntity<?> addCourse(@RequestBody Courses course, @PathVariable Long instructorId){
         try {
-            String courseName = courseService.addCourse(course);
+            String courseName = courseService.addCourse(course, instructorId);
             return new ResponseEntity<String>("New course " + courseName + " has been added", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
