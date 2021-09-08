@@ -17,8 +17,11 @@ public class Instructors implements Serializable {
     private String instructorName;
     private String instructorLastName;
     private Date instructorJoinDate;
-    @OneToMany(mappedBy = "instructor")
+    @OneToMany(mappedBy = "instructor",  orphanRemoval=true)
     private List<Courses> coursesList = new ArrayList<>();
+
+    public Instructors() {
+    }
 
     public Instructors(String instructorName, String instructorLastName, Date instructorJoinDate) {
         this.instructorName = instructorName;
