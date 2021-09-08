@@ -18,7 +18,7 @@ public class Students implements Serializable {
     private String studentLastName;
     private int studentAge;
     @ManyToMany(mappedBy = "studentsList")
-    private List<Courses> dishList = new ArrayList<>();
+    private List<Courses> coursesList = new ArrayList<>();
 
     public Students() {
     }
@@ -59,6 +59,14 @@ public class Students implements Serializable {
 
     public void setStudentAge(int studentAge) {
         this.studentAge = studentAge;
+    }
+
+    public List<Courses> getCoursesList() {
+        return coursesList;
+    }
+
+    public void setCoursesList(List<Courses> coursesList) {
+        this.coursesList = coursesList;
     }
 
     @Override

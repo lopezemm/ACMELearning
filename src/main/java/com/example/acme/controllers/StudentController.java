@@ -67,6 +67,10 @@ public class StudentController {
 
     @RequestMapping (value = "/enroll/{studentId}/{courseId}", method = RequestMethod.POST)
     public ResponseEntity<?> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId){
-
+        try {
+            return new ResponseEntity<String>(studentService.enrollCourse(studentId, courseId), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
