@@ -2,10 +2,13 @@ package com.example.acme.services;
 
 import com.example.acme.entities.Courses;
 import com.example.acme.entities.Instructors;
+import com.example.acme.entities.Students;
+import com.example.acme.repositpories.CourseRepo;
 import com.example.acme.repositpories.InstructorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +17,11 @@ public class InstructorService {
 
     InstructorRepo instructorRepo;
 
-    public InstructorService(InstructorRepo instructorRepo) {
+    CourseRepo courseRepo;
+
+    public InstructorService(InstructorRepo instructorRepo, CourseRepo courseRepo) {
         this.instructorRepo = instructorRepo;
+        this.courseRepo = courseRepo;
     }
 
     public String addInstructor(Instructors instructor){
@@ -49,5 +55,12 @@ public class InstructorService {
         }else{
             return null;
         }
+    }
+
+    public List<Students> getStudentsCourse(Long courseId){
+        Courses course = courseRepo.findById(courseId).get();
+        List<Students> studentsList = new ArrayList<>();
+        studentsList.addAll(course.getStudentsList());
+        return studentsList;
     }
 }

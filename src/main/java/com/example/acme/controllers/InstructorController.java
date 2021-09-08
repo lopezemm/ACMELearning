@@ -2,6 +2,7 @@ package com.example.acme.controllers;
 
 import com.example.acme.entities.Courses;
 import com.example.acme.entities.Instructors;
+import com.example.acme.entities.Students;
 import com.example.acme.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,18 @@ public class InstructorController {
             if(null != listCourses)
                 return new ResponseEntity<List<Courses>>(listCourses, HttpStatus.OK);
             return new ResponseEntity<String>("No courses were found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/students/course/{courseId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getStudentsCourse(@PathVariable Long courseId){
+        try {
+            List<Students> studentsList = instructorService.getStudentsCourse(courseId);
+            if(null != studentsList && studentsList.size()>0)
+                return new ResponseEntity<List<Students>>(studentsList, HttpStatus.OK);
+            return new ResponseEntity<String>("No students enrolled", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
