@@ -1,5 +1,6 @@
 package com.example.acme.controllers;
 
+import com.example.acme.entities.Courses;
 import com.example.acme.entities.Instructors;
 import com.example.acme.entities.Students;
 import com.example.acme.services.InstructorService;
@@ -49,6 +50,23 @@ public class StudentController {
         }catch (Exception e){
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+    }
+
+    @RequestMapping(value = "/allcourses", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllCourses(){
+        try{
+            List<Courses> listCourses = studentService.getAllCourses();
+            if(null!= listCourses && listCourses.size()>0)
+                return new ResponseEntity<List<Courses>>(listCourses, HttpStatus.OK);
+            return new ResponseEntity<String>("No courses found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping (value = "/enroll/{studentId}/{courseId}", method = RequestMethod.POST)
+    public ResponseEntity<?> enrollCourse(@PathVariable Long studentId, @PathVariable Long courseId){
 
     }
 }
