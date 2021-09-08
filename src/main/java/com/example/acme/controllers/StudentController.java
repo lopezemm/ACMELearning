@@ -73,4 +73,13 @@ public class StudentController {
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping(value = "/drop/{studentId}/{courseId}", method = RequestMethod.POST)
+    public ResponseEntity<?> dropCourse(@PathVariable Long studentId, @PathVariable Long courseId){
+        try {
+            return new ResponseEntity<String>(studentService.dropCourse(studentId, courseId), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

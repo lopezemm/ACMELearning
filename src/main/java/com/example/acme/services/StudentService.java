@@ -57,4 +57,13 @@ public class StudentService {
         return "Student " + student.getStudentName() + " has been enrolled to " + course.getCourseName() + " course";
     }
 
+    public String dropCourse(Long studentId, Long courseId){
+        Courses course = courseRepo.findById(courseId).get();
+        Students student = studentRepo.findById(studentId).get();
+        student.getCoursesList().remove(course);
+        course.getStudentsList().remove(student);
+        courseRepo.save(course);
+        return "Student " + student.getStudentName() + " has dropped " + course.getCourseName() + " course";
+    }
+
 }
