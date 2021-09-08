@@ -13,7 +13,6 @@ public class InstructorService {
 
     InstructorRepo instructorRepo;
 
-    @Autowired
     public InstructorService(InstructorRepo instructorRepo) {
         this.instructorRepo = instructorRepo;
     }

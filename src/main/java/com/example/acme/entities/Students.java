@@ -20,6 +20,9 @@ public class Students implements Serializable {
     @ManyToMany(mappedBy = "studentsList")
     private List<Courses> dishList = new ArrayList<>();
 
+    public Students() {
+    }
+
     public Students(String studentName, String studentLastName, int studentAge) {
         this.studentName = studentName;
         this.studentLastName = studentLastName;

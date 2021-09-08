@@ -1,5 +1,7 @@
 package com.example.acme.entities;
 
+import com.example.acme.util.CourseStartedValidation;
+
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +20,7 @@ public class Courses implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String courseName;
-    private boolean isStarted;
+    private String isStarted;
     private Date createDate;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -33,7 +35,10 @@ public class Courses implements Serializable {
     )
     private List<Students> studentsList = new ArrayList<>();
 
-    public Courses(String courseName, boolean isStarted, Date createDate) {
+    public Courses() {
+    }
+
+    public Courses(String courseName, String isStarted, Date createDate) {
         this.courseName = courseName;
         this.isStarted = isStarted;
         this.createDate = createDate;
@@ -55,12 +60,17 @@ public class Courses implements Serializable {
         this.courseName = courseName;
     }
 
-    public boolean isStarted() {
+    public String getIsStarted() {
         return isStarted;
     }
 
-    public void setStarted(boolean started) {
-        isStarted = started;
+    public void setIsStarted(String isStarted) {
+        //check if value is Y or N, if is not set or is a different value default value is N
+        if (CourseStartedValidation.contains(isStarted)) {
+            this.isStarted = isStarted;
+        }else {
+            this.isStarted = "N";
+        }
     }
 
     public Date getCreateDate() {

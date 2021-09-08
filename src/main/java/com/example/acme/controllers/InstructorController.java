@@ -15,7 +15,6 @@ public class InstructorController {
 
     InstructorService instructorService;
 
-    @Autowired
     public InstructorController(InstructorService instructorService) {
         this.instructorService = instructorService;
     }
@@ -36,7 +35,7 @@ public class InstructorController {
         try {
             if(instructorService.deleteInstructor(instructorId))
                 return new ResponseEntity<String>("Delete success", HttpStatus.OK);
-            return new ResponseEntity<String>("Chef with Id " + instructorId + " was not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("Instructor with Id " + instructorId + " was not found", HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<String>("An error has been occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
