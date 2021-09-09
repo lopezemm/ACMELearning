@@ -18,6 +18,13 @@ public class SpringSecurityWebAuxTestConfig {
     @Primary
     public UserDetailsService userDetailsService() {
 
+        AcmeUsers acmeUserST = new AcmeUsers();
+        acmeUserST.setUserName("student");
+        acmeUserST.setPassword("pass");
+        acmeUserST.setRole("STD");
+        AcmeSecurityUser studentRole;
+        studentRole = new AcmeSecurityUser(acmeUserST);
+
         AcmeUsers acmeUser = new AcmeUsers();
         acmeUser.setUserName("emm");
         acmeUser.setPassword("pass");
@@ -25,8 +32,9 @@ public class SpringSecurityWebAuxTestConfig {
         AcmeSecurityUser managerActiveUser;
         managerActiveUser = new AcmeSecurityUser(acmeUser);
 
+
         return new InMemoryUserDetailsManager(Arrays.asList(
-                managerActiveUser
+                managerActiveUser, studentRole
         ));
     }
 }

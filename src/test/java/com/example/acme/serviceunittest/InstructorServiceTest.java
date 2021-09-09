@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.sql.Date;
 import java.util.Arrays;
 
@@ -33,14 +33,14 @@ public class InstructorServiceTest {
         Instructors i = new Instructors("instName", "instLastName", Date.valueOf("2021-01-01"));
         i.setId(1L);
         when(instructorService.addInstructor(instructor)).thenReturn(i.getInstructorName());
-        instructorService.addInstructor(instructor);
+        assertEquals("instName",instructorService.addInstructor(instructor));
         verify(instructorService, times(1)).addInstructor(instructor);
     }
 
     @Test
     public void deleteInstructorTest() throws Exception {
         when(instructorService.deleteInstructor(1L)).thenReturn(true);
-        instructorService.deleteInstructor(1L);
+        assertEquals(true,instructorService.deleteInstructor(1L));
         verify(instructorService, times(1)).deleteInstructor(1L);
     }
 
@@ -52,21 +52,21 @@ public class InstructorServiceTest {
         c.setCreateDate(Date.valueOf("2021-01-01"));
         c.setId(1L);
         when(instructorService.getMyCourses(1L)).thenReturn(Arrays.asList(c));
-        instructorService.getMyCourses(1L);
+        assertEquals(1,instructorService.getMyCourses(1L).size());
         verify(instructorService, times(1)).getMyCourses(1L);
     }
 
     @Test
     public void getAllInstructorsTest() throws Exception {
         when(instructorService.getAllInstructors()).thenReturn(Arrays.asList(instructor));
-        instructorService.getAllInstructors();
+        assertEquals(1,instructorService.getAllInstructors().size());
         verify(instructorService, times(1)).getAllInstructors();
     }
 
     @Test
     public void findInstructorTest() throws Exception{
         when(instructorService.findInstructor(1L)).thenReturn(instructor);
-        instructorService.findInstructor(1L);
+        assertEquals("instName",instructorService.findInstructor(1L).getInstructorName());
         verify(instructorService, times(1)).findInstructor(1L);
 
     }
@@ -79,7 +79,7 @@ public class InstructorServiceTest {
         s.setStudentLastName("test");
         s.setId(1L);
         when(instructorService.getStudentsCourse(1L)).thenReturn(Arrays.asList(s));
-        instructorService.getStudentsCourse(1L);
+        assertEquals(1,instructorService.getStudentsCourse(1L).size());
         verify(instructorService, times(1)).getStudentsCourse(1L);
     }
 }

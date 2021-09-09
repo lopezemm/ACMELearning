@@ -35,7 +35,7 @@ public class CoursesServiceUnitTest {
     @Test
     public void addCourseTest() throws Exception {
         when(courseService.addCourse(c)).thenReturn(c.getCourseName());
-        courseService.addCourse(c);
+        assertEquals("test",courseService.addCourse(c));
         verify(courseService, times(1)).addCourse(c);
     }
 
@@ -49,35 +49,35 @@ public class CoursesServiceUnitTest {
     @Test
     public void deleteCourseTest() throws Exception {
         when(courseService.deleteCourse(1L)).thenReturn(true);
-        courseService.deleteCourse(1L);
+        assertEquals(true,courseService.deleteCourse(1L));
         verify(courseService, times(1)).deleteCourse(1L);
     }
 
     @Test
     public void getAllCoursesTest(){
         when(courseService.getAllCourses()).thenReturn(Arrays.asList(c));
-        courseService.getAllCourses();
+        assertEquals(1, courseService.getAllCourses().size());
         verify(courseService, times(1)).getAllCourses();
     }
 
     @Test
     public void startCourseTest() throws Exception {
         when(courseService.startCourse(1L)).thenReturn(c.getCourseName());
-        courseService.startCourse(1L);
+        assertEquals("test",courseService.startCourse(1L));
         verify(courseService, times(1)).startCourse(1L);
     }
 
     @Test
     public void cancelCourseTest() throws Exception {
         when(courseService.cancelCourse(1L)).thenReturn(c.getCourseName());
-        courseService.cancelCourse(1L);
+        assertEquals("test",courseService.cancelCourse(1L));
         verify(courseService, times(1)).cancelCourse(1L);
     }
 
     @Test
     public void findCourseTest() throws Exception {
         when(courseService.findCourse(1L)).thenReturn(c);
-        courseService.findCourse(1L);
+        assertEquals(1,courseService.findCourse(1L).getId());
         verify(courseService, times(1)).findCourse(1L);
     }
 
