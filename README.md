@@ -5,7 +5,7 @@ ACME Learning is an online education platform that helps Instructors to create C
 ## Installation and Running application
 
 - Clone the application
-- Implement mvn clean package command
+- Run mvn clean package command
 - In target folder ACME-v1.0.jar will be created
 - Open Windows explorer and navigate to target (..cloned_path\acme\target) in address bar type cmd and press enter
 - A command window will open, there type java -jar ACME-v1.0.jar and press enter
