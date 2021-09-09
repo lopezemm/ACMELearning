@@ -31,6 +31,18 @@ ACME learning app has 2 roles:
 - STD: This role is set for students and only gives access to Students services
 - INSTR: This is instructor role and have access to all services in the application
 
+**Courses:**
+
+ACME learning app handles 3 different status for courses, that you have to provide when creating your courses.
+These statuses indicate if a course is _**N**ot started_, _**S**arted_ or _**C**ancelled_:
+
+- N: Stands for NotStarted
+- S: Stands for Started 
+- C: Stands for Cancelled 
+
+Remember when creating a new course set the course status to those values any not recognized values will set the course as N
+by default. 
+
 **Services:**
 
 SignUp
@@ -48,3 +60,4 @@ Instructor
 
 As an instructor you will be able to manage all related to instructors and courses, will be able to see all courses, the courses you created
 start a course or cancel a course and see which students are enrolled to a course
+
