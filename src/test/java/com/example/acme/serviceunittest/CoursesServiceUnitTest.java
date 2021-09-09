@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Date;
 import java.util.Arrays;
@@ -36,6 +37,13 @@ public class CoursesServiceUnitTest {
         when(courseService.addCourse(c)).thenReturn(c.getCourseName());
         courseService.addCourse(c);
         verify(courseService, times(1)).addCourse(c);
+    }
+
+    @Test
+    public void addCourseOVTest() throws Exception {
+        when(courseService.addCourse(c, 1L)).thenReturn(c.getCourseName());
+        assertEquals("test",courseService.addCourse(c, 1L));
+        verify(courseService, times(1)).addCourse(c, 1L);
     }
 
     @Test
