@@ -5,9 +5,10 @@ ACME Learning is an online education platform that helps Instructors to create C
 ## Installation and Running application
 
 - Clone the application
-- Implement a maven package command
+- Implement mvn clean package command
 - In target folder ACME-v1.0.jar will be created
 - Open console and type java -java ACME-v1.0.jar and press enter
+- Application must start
 
 ## Postman collection
 
@@ -33,7 +34,9 @@ ACME learning app has 2 roles:
 
 SignUp
 
-First you have to signup to the application using the register service. If you don't signup you wont be able to use any of the services
+First you have to signup to the application using the register service. If you don't signup you wont be able to use any of the services.
+After signup you have to use basic authentication for all your request using your username and password
+
 
 Students
 
