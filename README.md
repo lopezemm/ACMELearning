@@ -34,7 +34,7 @@ ACME learning app has 2 roles:
 **Courses:**
 
 ACME learning app handles 3 different status for courses, that you have to provide when creating your courses.
-These statuses indicate if a course is _**N**ot started_, _**S**arted_ or _**C**ancelled_:
+These statuses indicate if a course is _**N**ot started_, _**S**tarted_ or _**C**ancelled_:
 
 - N: Stands for NotStarted
 - S: Stands for Started 
