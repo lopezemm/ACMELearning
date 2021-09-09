@@ -9,7 +9,7 @@ ACME Learning is an online education platform that helps Instructors to create C
 - In target folder ACME-v1.0.jar will be created
 - Open console and type java -java ACME-v1.0.jar and press enter
 
-##Postman collection
+## Postman collection
 
 - Once the application is in your local go to the Postman folder in app root
 - Import to postman the file ACME.postman_collection.json
