@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 )
 @AutoConfigureMockMvc(addFilters = false)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class StudentControllerUnitTest {
+public class StudentControllerIntTest {
 
     @Autowired
     private MockMvc mockMvc;
