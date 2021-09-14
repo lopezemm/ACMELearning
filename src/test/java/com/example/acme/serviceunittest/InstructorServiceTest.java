@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.isA;
@@ -25,12 +26,12 @@ public class InstructorServiceTest {
 
     @BeforeEach
     public void setup(){
-        instructor = new Instructors("instName", "instLastName", Date.valueOf("2021-01-01"));
+        instructor = new Instructors("instName", "instLastName", LocalDate.parse("2021-01-01"));
     }
 
     @Test
     public void addInstructorTest() throws Exception {
-        Instructors i = new Instructors("instName", "instLastName", Date.valueOf("2021-01-01"));
+        Instructors i = new Instructors("instName", "instLastName", LocalDate.parse("2021-01-01"));
         i.setId(1L);
         when(instructorService.addInstructor(instructor)).thenReturn(i.getInstructorName());
         assertEquals("instName",instructorService.addInstructor(instructor));
@@ -49,7 +50,7 @@ public class InstructorServiceTest {
         Courses c = new Courses();
         c.setCourseName("test");
         c.setIsStarted("N");
-        c.setCreateDate(Date.valueOf("2021-01-01"));
+        c.setCreateDate(LocalDate.parse("2021-01-01"));
         c.setId(1L);
         when(instructorService.getMyCourses(1L)).thenReturn(Arrays.asList(c));
         assertEquals(1,instructorService.getMyCourses(1L).size());

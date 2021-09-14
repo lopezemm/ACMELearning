@@ -21,6 +21,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.containsString;
@@ -67,7 +68,7 @@ public class StudentControllerUnitTest {
         c.setCourseName("test");
         c.setIsStarted("N");
         c.setId(1L);
-        c.setCreateDate(Date.valueOf("2021-01-01"));
+        c.setCreateDate(LocalDate.parse("2021-01-01"));
     }
 
     @Test

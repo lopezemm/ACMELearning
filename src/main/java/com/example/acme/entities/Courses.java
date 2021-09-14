@@ -2,6 +2,11 @@ package com.example.acme.entities;
 
 import com.example.acme.util.CourseStartedValidation;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
@@ -11,6 +16,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 public class Courses implements Serializable {
@@ -22,7 +28,10 @@ public class Courses implements Serializable {
     private long id;
     private String courseName;
     private String isStarted;
-    private Date createDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate createDate;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "instructorId")
@@ -39,7 +48,7 @@ public class Courses implements Serializable {
     public Courses() {
     }
 
-    public Courses(String courseName, String isStarted, Date createDate) {
+    public Courses(String courseName, String isStarted, LocalDate createDate) {
         this.courseName = courseName;
         this.isStarted = isStarted;
         this.createDate = createDate;
@@ -74,11 +83,11 @@ public class Courses implements Serializable {
         }
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 

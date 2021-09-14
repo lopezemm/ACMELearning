@@ -1,10 +1,16 @@
 package com.example.acme.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +24,17 @@ public class Instructors implements Serializable {
     private long id;
     private String instructorName;
     private String instructorLastName;
-    private Date instructorJoinDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate instructorJoinDate;
     @OneToMany(mappedBy = "instructor",  orphanRemoval=true)
     private List<Courses> coursesList = new ArrayList<>();
 
     public Instructors() {
     }
 
-    public Instructors(String instructorName, String instructorLastName, Date instructorJoinDate) {
+    public Instructors(String instructorName, String instructorLastName, LocalDate instructorJoinDate) {
         this.instructorName = instructorName;
         this.instructorLastName = instructorLastName;
         this.instructorJoinDate = instructorJoinDate;
@@ -55,11 +64,11 @@ public class Instructors implements Serializable {
         this.instructorLastName = instructorLastName;
     }
 
-    public Date getInstructorJoinDate() {
+    public LocalDate getInstructorJoinDate() {
         return instructorJoinDate;
     }
 
-    public void setInstructorJoinDate(Date instructorJoinDate) {
+    public void setInstructorJoinDate(LocalDate instructorJoinDate) {
         this.instructorJoinDate = instructorJoinDate;
     }
 

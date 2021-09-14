@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.hamcrest.Matchers.containsString;
@@ -61,7 +62,7 @@ public class InstructorControllerUnitTest {
         instructor.setInstructorName("test");
         instructor.setId(1L);
         instructor.setInstructorLastName("lastname");
-        instructor.setInstructorJoinDate(Date.valueOf("2021-01-01"));
+        instructor.setInstructorJoinDate(LocalDate.parse("2021-01-01"));
     }
 
     @Test
@@ -105,7 +106,7 @@ public class InstructorControllerUnitTest {
         Courses c = new Courses();
         c.setCourseName("test");
         c.setIsStarted("N");
-        c.setCreateDate(Date.valueOf("2021-01-01"));
+        c.setCreateDate(LocalDate.parse("2021-01-01"));
         c.setId(1L);
         when(instructorService.getMyCourses(1L)).thenReturn(Arrays.asList(c));
         mockMvc.perform(get("/instructors/mycourses/{instructorId}", 1)

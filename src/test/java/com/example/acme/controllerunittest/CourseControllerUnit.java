@@ -17,8 +17,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.test.web.servlet.MockMvc;
-import java.sql.Date;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.TimeZone;
+
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -52,12 +57,14 @@ public class CourseControllerUnit {
     }
 
     @BeforeEach
-    public void setup(){
+    public void setup() throws Exception{
         course = new Courses();
         course.setCourseName("test");
         course.setIsStarted("N");
-        course.setCreateDate(Date.valueOf("2021-02-01"));
+        course.setCreateDate(LocalDate.parse(("2021-02-01")));
         course.setId(1L);
+
+
     }
 
     @Test
